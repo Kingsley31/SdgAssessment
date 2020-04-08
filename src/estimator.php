@@ -66,11 +66,11 @@ function getSeverImpact($reportedCases,$duration,$periodType){
 
 function covid19ImpactEstimator($data)
 {
-  $inputData=json_decode($data);
+  
   //Data Needed functions
-  $reportedCases=$inputData["reportedCases"];
-  $duration=$inputData["timeToElapse"];
-  $periodType=$inputData["periodType"];
+  $reportedCases=$data["reportedCases"];
+  $duration=$data["timeToElapse"];
+  $periodType=$data["periodType"];
 
  
   $output["data"] =$data;
