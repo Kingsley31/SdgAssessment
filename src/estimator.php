@@ -74,16 +74,11 @@ function covid19ImpactEstimator($data)
 
  
   $output["data"] =$data;
-
   $output["impact"]=getImpact($reportedCases,$duration,$periodType);
   $output["severeImpact"]=getSeverImpact($reportedCases,$duration,$periodType);
-
+  $data=$output;
   
-
-  
-  //impact
-  //severeImpact
-  return $output;
+  return $data;
 }
 
 
