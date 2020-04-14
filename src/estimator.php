@@ -33,8 +33,12 @@ function getSevereCasesByRequestedTime($infectionsByRequestedTime){
   return $severeCasesByRequestedTime;//severeCasesByRequestedTime
 }
 
+function getHospitalBedsByRequestedTime($totalHospitalBeds,$severeCasesByRequestedTime){
+     return $totalHospitalBeds * (30/100);
+} 
 
-function getImpact($reportedCases,$duration,$periodType){
+
+function getImpact($reportedCases,$duration,$periodType,$totalHospitalBeds){
   $impact=[];
 
   $currentlyInfected=getCurrentlyInfected($reportedCases);
@@ -46,10 +50,13 @@ function getImpact($reportedCases,$duration,$periodType){
   $severeCasesByRequestedTime=getSevereCasesByRequestedTime($infectionsByRequestedTime);
   $impact["severeCasesByRequestedTime"]=$severeCasesByRequestedTime;
 
+  $hospitalBedsByRequestedTime=getHospitalBedsByRequestedTime($totalHospitalBeds,$severeCasesByRequestedTime);
+  $impact["hospitalBedsByRequestedTime"]=$hospitalBedsByRequestedTime;
+
   return $impact;
 }
 
-function getSeverImpact($reportedCases,$duration,$periodType){
+function getSeverImpact($reportedCases,$duration,$periodType,$totalHospitalBeds){
   $severeImpact=[];
   $currentlyInfected_severe=getCurrentlyInfectedForSeverImpact($reportedCases);
   $severeImpact["currentlyInfected"]=$currentlyInfected_severe;
@@ -59,6 +66,9 @@ function getSeverImpact($reportedCases,$duration,$periodType){
 
   $severeCasesByRequestedTime_severe=getSevereCasesByRequestedTime($infectionsByRequestedTime_severe);
   $severeImpact["severeCasesByRequestedTime"]=$severeCasesByRequestedTime_severe;
+
+  $hospitalBedsByRequestedTime=getHospitalBedsByRequestedTime($totalHospitalBeds,$severeCasesByRequestedTime_severe);
+  $impact["hospitalBedsByRequestedTime"]=$hospitalBedsByRequestedTime;
 
   return $severeImpact;
 }
@@ -71,11 +81,12 @@ function covid19ImpactEstimator($data)
   $reportedCases=$data["reportedCases"];
   $duration=$data["timeToElapse"];
   $periodType=$data["periodType"];
+  $totalHospitalBeds=$data["totalHospitalBeds"];
 
  
   $output["data"] =$data;
-  $output["impact"]=getImpact($reportedCases,$duration,$periodType);
-  $output["severeImpact"]=getSeverImpact($reportedCases,$duration,$periodType);
+  $output["impact"]=getImpact($reportedCases,$duration,$periodType,$totalHospitalBeds);
+  $output["severeImpact"]=getSeverImpact($reportedCases,$duration,$periodType,$totalHospitalBeds);
   $data=$output;
   
   return $data;
