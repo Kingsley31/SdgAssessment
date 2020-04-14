@@ -32,6 +32,11 @@
     }elseif ($format=="logs") {
         header('Content-Type: text/plain');
         $logs=file_get_contents("log.txt");
+        $time_elapsed_secs = (microtime(true) - $start)*1000;
+        $path=$_SERVER['REQUEST_URI'];
+        $get_http_response_code=http_response_code();
+        $log=$_SERVER['REQUEST_METHOD']."   ".$path."    ".$get_http_response_code." ".intval($time_elapsed_secs)."ms \n";
+        file_put_contents('log.txt', $log, FILE_APPEND);
         echo $logs;
     }else{
         header('Content-Type: application/json');
