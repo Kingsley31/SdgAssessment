@@ -68,7 +68,7 @@ function getSeverImpact($reportedCases,$duration,$periodType,$totalHospitalBeds)
   $severeImpact["severeCasesByRequestedTime"]=$severeCasesByRequestedTime_severe;
 
   $hospitalBedsByRequestedTime=getHospitalBedsByRequestedTime($totalHospitalBeds,$severeCasesByRequestedTime_severe);
-  $impact["hospitalBedsByRequestedTime"]=$hospitalBedsByRequestedTime;
+  $severeImpact["hospitalBedsByRequestedTime"]=$hospitalBedsByRequestedTime;
 
   return $severeImpact;
 }
@@ -91,5 +91,4 @@ function covid19ImpactEstimator($data)
   
   return $data;
 }
-
 
