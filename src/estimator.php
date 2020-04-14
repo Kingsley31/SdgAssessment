@@ -34,7 +34,7 @@ function getSevereCasesByRequestedTime($infectionsByRequestedTime){
 }
 
 function getHospitalBedsByRequestedTime($totalHospitalBeds,$severeCasesByRequestedTime){
-     return ($totalHospitalBeds * (35/100)) - $severeCasesByRequestedTime;
+     return intval(($totalHospitalBeds * (35/100)) - $severeCasesByRequestedTime);
 } 
 
 
