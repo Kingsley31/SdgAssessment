@@ -43,7 +43,7 @@ function getCasesForICUForICUByRequestedTime($infectionsByRequestedTime){
 
 
 function getCasesForVentilatorsByRequestedTime($infectionsByRequestedTime){
-  return $infectionsByRequestedTime * (2/100);
+  return intval($infectionsByRequestedTime * (2/100));
 }
 
 function getNumOfDays($duration,$periodType){
